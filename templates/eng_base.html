@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Alp Niksarli">
+  <meta name="keywords" content="Tubitak, kitaplık">
+
+	<title>{% block title %} Kitaplık+ {% endblock %}</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js" integrity="sha512-Tn2m0TIpgVyTzzvmxLNuqbSJH3JP8jm+Cy3hvHrW7ndTDcJ1w5mBiksqDBb8GpE2ksktFvDB/ykZ0mDpsZj20w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/fontawesome.css" integrity="sha384-eHoocPgXsiuZh+Yy6+7DsKAerLXyJmu2Hadh4QYyt+8v86geixVYwFqUvMU8X90l" crossorigin="anonymous"/>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'base.css' %}"> 
+  {% block css %} {% endblock %}
+</head>
+<body>
+
+<nav id="navbar" class="navbar navbar-expand-md fixed-top">
+  <a class="navbar-brand" style="color:#35a0de !important" href="{% url 'index:index' %}">Kitaplık+</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon">
+      <i class="fas fa-bars" style="color:#35a0de; font-size:24px;"></i>
+    </span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item navigate">
+        <a id="nav-about" class="nav-link" href="{% url 'index:ekle' %}">Enhance the Library</a>
+      </li>
+    </ul>
+    <div class="my-2 my-lg-0 col-md-6 d-flex justify-content-end">
+      <form method="POST" class="form-inline suitability-form">
+        {% csrf_token %}
+        <input type="hidden" name="positive" value="positive">
+        <button type="submit" class="btn btn-outline-success mr-2">Suitable</button>
+      </form>
+      <form method="POST" class="form-inline suitability-form">
+        {% csrf_token %}
+        <input type="hidden" name="negative" value="negative">
+        <button type="submit" class="btn btn-outline-danger mr-3">Not Suitable</button>
+      </form>
+      <form method="POST" class="form-inline">
+        {% csrf_token %}
+        <input type="hidden" name="dil" value="dil">
+        <button type="submit" class="btn btn-primary">TR</button>
+      </form>
+      </div>
+  </div>
+</nav>
+
+{% block content%}{% endblock %}
+
+
+  <footer class="footer navbar text-center">
+    <div class="container">
+      <span>© 2023 <a href="">Kitaplık+</a>. Developed by <a href="">Alp Niksarli</a>, <a href="">Sadık Ozan Görgü</a> ve <a href="">Ege Gençer</a> for our Tubitak project.</span>
+    </div>
+  </footer>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  
+  <script src="{% static 'script.js' %}">
+  </script>
+  <script>
+
+    var skorSpans = document.querySelectorAll("span.skor"); 
+
+    skorSpans.forEach(skorSpan => {
+      var skorVal = parseFloat(skorSpan.innerHTML); 
+      console.log(skorSpan.innerHTML);
+      if (skorVal > 0.50) {
+        var color = "green";
+      } else {
+        var color = "red";
+      }
+      skorRow = skorSpan.parentElement;
+      skorRow.classList.add(color);  
+    })
+
+  </script>
+</html>

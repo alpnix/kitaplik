@@ -1,0 +1,44 @@
+{% extends '_base.html' %}
+
+{% block css %}
+
+<style>
+    .green {
+        color: green;
+    }
+    
+    .red {
+        color: red;
+    }
+    
+    .orange {
+        color: orange;
+    }    
+</style>
+
+{% endblock %}
+
+{% block content %}
+<h1 class="display-4 mt-3 mb-2 text-center">Kitaplık+</h1>
+<p class="mb-3 text-center font-italic">Bir kitap da sen koy</p>
+<main role="main" class="container d-flex flex-column justify-content-center">
+    <div class="formdiv d-flex flex-column justify-content-center mb-3">
+        <form method="POST" style="width: 100% !important" class="form-inline my-2 my-lg-0 d-flex justify-content-center mb-3 mt-6">
+            {% csrf_token %}
+            <div style="position: relative;">
+                <input name="search"  class="custom_search form-control mr-sm-2" type="search" placeholder="Ara..." aria-label="Search">
+                <span class="search_span"></span>
+            </div>
+            <button class="ml-lg-3 btn btn-success my-2 my-sm-0 search_button tx--white" type="submit" ripple="ripple">Başlat</button>
+        </form>
+    </div>
+    <div class="kitaplar d-flex flex-column align-items-center justify-content-start mt-6">
+        {% for kitap in kitaplar %}
+           <p class="kitap-row"><b>İsim:</b> {{kitap.title}} &emsp; <b>Skor:</b> <span class="skor">{{kitap.score|floatformat:3}}</span></p>
+        {% empty %}
+            <p>Kitap bulunamadı..</p>
+        {% endfor %}
+    </div>
+</main>
+
+{% endblock %}

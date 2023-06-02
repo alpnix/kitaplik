@@ -1,0 +1,43 @@
+{% extends 'eng_base.html' %}
+
+
+{% block content %}
+<h1 class="display-4 mt-3 mb-3 text-center">Kitaplık+</h1>
+
+<main role="main" class="container d-flex justify-content-center">
+    <form class="form-signin container" method="POST" enctype="multipart/form-data" action="">
+        {% csrf_token %}
+        <h1 class="h3 mb-3 font-weight-normal">Add a book</h1>
+        <!-- <label for="isim" class="sr-only">Email adresi</label>
+        <input name="isim" type="email" id="isim" class="form-control mb-2" placeholder="Kitap ismi" required autofocus>
+        <label for="kitap" class="sr-only">Şifre</label>
+        <input name="kitap" type="file" id="kitap" class="form-control mb-2" required> -->
+        <div class="row mb-3">
+            {% for field in form  %}
+              <div class="col-sm-4">
+               {{ field }} 
+              </div>
+            {% endfor %}
+        </div>  
+
+        <div class="form-group">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Add Book</button>
+        </div>
+    </form>
+</main>
+
+<script>
+    var suitabilityForms = document.querySelectorAll(".suitability-form");
+    suitabilityForms.forEach((form) => {
+        form.hidden = true;
+        console.log(form);
+    })
+
+    var bookNameInput = document.querySelector("#book_name_input");
+    var authorNameInput = document.querySelector("#author_name_input");
+
+    bookNameInput.placeholder='Book name';
+    authorNameInput.placeholder='Author name';
+</script>
+
+{% endblock %}
