@@ -20,7 +20,7 @@ class KitapForm(ModelForm):
                 'id': 'author_name_input',
                 'style': 'max-width: 300px;',
                 'placeholder': 'Yazar ismi',
-                'required': True,
+                'required': False,
             }),
                 'file': FileInput(attrs={
                 'class': "form-control", 

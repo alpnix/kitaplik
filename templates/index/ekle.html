@@ -1,5 +1,9 @@
 {% extends '_base.html' %}
 
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'loading-animation.css' %}">
+{% endblock %}
 
 {% block content %}
 <h1 class="display-4 mt-3 mb-3 text-center">Kitaplık+</h1>
@@ -21,9 +25,37 @@
         </div>  
 
         <div class="form-group">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Kitabı ekleyiniz</button>
+            <button id="submitBtn" class="btn btn-lg btn-primary btn-block" type="submit">Kitabı ekle</button>
         </div>
     </form>
+
+    <div class="book">
+        <div class="inner">
+            <div class="left"></div>
+            <div class="middle"></div>
+            <div class="right"></div>
+        </div>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
 </main>
 
 <script>
@@ -36,6 +68,32 @@
     var bookFileInput = document.querySelector("#book_file_input");
 
     bookFileInput.placeholder='Kitap dosyası seçilmedi';
+
+
+    // put loading animation 
+    var submitBtn = document.querySelector("#submitBtn");
+    var loadingAnimation = document.querySelector(".book");
+    var inputs = document.querySelectorAll("input"); 
+
+    // doument.querySelector("#book_name_input").required = true;
+    // doument.querySelector("#book_file_input").required = true;
+    const isEmpty = (str) => (!str?.length);
+
+
+    submitBtn.addEventListener("click", e => {
+        var bookName = document.querySelector("#book_name_input").value
+        var fileInput = document.querySelector("#book_file_input").value
+
+        if (!isEmpty(bookName) & !isEmpty(fileInput)) {
+            loadingAnimation.style.display = "block";  
+            inputs.forEach(input => {
+                input.disabled = true;
+            })
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = "Kitabınız ekleniyor...";
+        }
+    })
+
 
 </script>
 
