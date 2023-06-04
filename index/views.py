@@ -92,10 +92,9 @@ def ekle(request):
             except TypeError: 
                 text = XPdf(full_path).to_text()
 
-            #book_data = get_book_data(text=None, book_location=full_path)
-            #scaled_book_data = scale_data(book_data)
-            #suitability = predict_suitability(scaled_book_data)
-            suitability = 0.5
+            book_data = get_book_data(text=None, book_location=full_path)
+            scaled_book_data = scale_data(book_data)
+            suitability = predict_suitability(scaled_book_data)
 
             k = Kitap.objects.filter(title=request.POST["title"])
             k.update(text=text)
