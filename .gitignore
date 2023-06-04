@@ -1,0 +1,5 @@
+book_files/
+*.txt
+
+# do not ignore this
+requirements.txt
