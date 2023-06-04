@@ -79,17 +79,18 @@
     // doument.querySelector("#book_file_input").required = true;
     const isEmpty = (str) => (!str?.length);
 
-
-     submitBtn.addEventListener("click", e => {
+    submitBtn.addEventListener("click", e => {
         var bookName = document.querySelector("#book_name_input").value
         var fileInput = document.querySelector("#book_file_input").value
 
         if (!isEmpty(bookName) & !isEmpty(fileInput)) {
             loadingAnimation.style.display = "block";  
-            inputs.forEach(input => {
+            /** inputs.forEach(input => {
                 input.disabled = true;
             })
-            submitBtn.disabled = true;
+            inputs[0].disabled = false;
+            submitBtn.disabled = true; **/
+            
             submitBtn.innerHTML = "Kitabınız ekleniyor...";
         }
     }) 
