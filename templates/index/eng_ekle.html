@@ -28,6 +28,35 @@
             <button id="submitBtn" class="btn btn-lg btn-primary btn-block" type="submit">Add Book</button>
         </div>
     </form>
+
+
+    <div class="book">
+        <div class="inner">
+            <div class="left"></div>
+            <div class="middle"></div>
+            <div class="right"></div>
+        </div>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
 </main>
 
 <script>
@@ -57,7 +86,9 @@
         var bookName = document.querySelector("#book_name_input").value
         var fileInput = document.querySelector("#book_file_input").value
 
+        console.log(bookName);
         if (!isEmpty(bookName) & !isEmpty(fileInput)) {
+            console.log("animationn");
             loadingAnimation.style.display = "block";  
             inputs.forEach(input => {
                 input.disabled = true;
