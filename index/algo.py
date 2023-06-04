@@ -323,7 +323,6 @@ def get_book_data(text, book_location):
 
     return list(book_values.values())
 
-def old_get_book_data(text, book_location): 
     import nltk
 
     from nltk.corpus import stopwords
