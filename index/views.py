@@ -12,7 +12,7 @@ import random
 # Create your views here.
 
 def index(request): 
-    kitaplar = Kitap.objects.all()
+    kitaplar = Kitap.objects.filter(score__isnull=False)
     
     positive = "btn-outline-success" 
     negative = "btn-outline-danger"
@@ -70,18 +70,12 @@ def ekle(request):
         if form.is_valid():
             # file is saved
             form.save()
-            
-            # book_file = request.FILES["file"]
-            # file_name = default_storage.save(f"book_files/{book_file.name}", book_file)
-            # file_url = default_storage.url(file_name).replace(" ", "").replace("-", "")
-
-            # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            # full_path=os.path.join(BASE_DIR, file_url)
 
             
             book_file = request.FILES["file"]
             BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            full_path=os.path.join(BASE_DIR, book_file.name.replace(" ", "_").replace("(", "").replace(")", "").replace("'", ""))
+            special_characters = ".:,;~-_[]()=@?\/}{&%$#^'*!£+\"><|"
+            full_path=os.path.join(BASE_DIR, "book_files/"+book_file.name.replace(" ", "_").replace("(", "").replace(")", "").replace("'", "").replace(",", ""))
             print(full_path)
 
 
@@ -92,14 +86,17 @@ def ekle(request):
             except TypeError: 
                 text = XPdf(full_path).to_text()
 
-            book_data = get_book_data(text=None, book_location=full_path)
-            scaled_book_data = scale_data(book_data)
-            suitability = predict_suitability(scaled_book_data)
-
             k = Kitap.objects.filter(title=request.POST["title"])
             k.update(text=text)
 
+            # os.remove(full_path)
+
+            book_data = get_book_data(text=text, book_location=None)
+            scaled_book_data = scale_data(book_data)
+            suitability = predict_suitability(scaled_book_data)
+
             k.update(score=suitability)
+
 
             return redirect("index:index")
     else:
