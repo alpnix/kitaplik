@@ -74,7 +74,7 @@ def ekle(request):
             
             book_file = request.FILES["file"]
             BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            special_characters = ".:,;~-_[]()=@?\/}{&%$#^'*!£+\"><|"
+            special_characters = ".:,;~-_[]()=@?\/}{&%$#^'*!£+\"><|\""
             full_path=os.path.join(BASE_DIR, "book_files/"+book_file.name.replace(" ", "_").replace("(", "").replace(")", "").replace("'", "").replace(",", ""))
             print(full_path)
 
@@ -85,6 +85,9 @@ def ekle(request):
                 f.close()
             except TypeError: 
                 text = XPdf(full_path).to_text()
+            except UnicodeDecodeError: 
+                text = XPdf(full_path).to_text()
+
 
             k = Kitap.objects.filter(title=request.POST["title"])
             k.update(text=text)
