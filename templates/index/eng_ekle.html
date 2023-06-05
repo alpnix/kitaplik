@@ -86,17 +86,22 @@
         var bookName = document.querySelector("#book_name_input").value
         var fileInput = document.querySelector("#book_file_input").value
 
-        console.log(bookName);
         if (!isEmpty(bookName) & !isEmpty(fileInput)) {
-            console.log("animationn");
             loadingAnimation.style.display = "block";  
             inputs.forEach(input => {
-                input.disabled = true;
+                input.readOnly = true;
             })
-            submitBtn.disabled = true;
+
+            setTimeout(function() {
+                console.log("function working..."); 
+                document.querySelector("#book_file_input").disabled = true;
+                submitBtn.disabled = true;     
+            }, 100)
+            
             submitBtn.innerHTML = "Kitabınız ekleniyor...";
         }
     })
+
 
 </script>
 

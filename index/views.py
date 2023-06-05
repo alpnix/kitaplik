@@ -81,7 +81,7 @@ def ekle(request):
             
             book_file = request.FILES["file"]
             BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            full_path=os.path.join(BASE_DIR, book_file.name.replace(" ", "_").replace("(", "").replace(")", ""))
+            full_path=os.path.join(BASE_DIR, book_file.name.replace(" ", "_").replace("(", "").replace(")", "").replace("'", ""))
             print(full_path)
 
 

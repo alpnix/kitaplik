@@ -85,11 +85,15 @@
 
         if (!isEmpty(bookName) & !isEmpty(fileInput)) {
             loadingAnimation.style.display = "block";  
-            /** inputs.forEach(input => {
-                input.disabled = true;
+            inputs.forEach(input => {
+                input.readOnly = true;
             })
-            inputs[0].disabled = false;
-            submitBtn.disabled = true; **/
+
+            setTimeout(function() {
+                console.log("function working..."); 
+                document.querySelector("#book_file_input").disabled = true;
+                submitBtn.disabled = true;     
+            }, 3)
             
             submitBtn.innerHTML = "Kitabınız ekleniyor...";
         }
